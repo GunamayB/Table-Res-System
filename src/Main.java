@@ -59,8 +59,7 @@ public class Main {
 				else{
 					throw new ExUnknownCommand();
 				}
-			}catch (ExUnknownCommand e)
-			{
+			}catch (ExUnknownCommand e) {
 				System.out.println(e.getMessage());
 			}
 		}
