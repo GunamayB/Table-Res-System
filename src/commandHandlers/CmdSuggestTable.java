@@ -1,4 +1,11 @@
+package commandHandlers;
+
 import java.util.ArrayList;
+import tableHandler.*;
+import exceptionHandling.*;
+import bookings.*;
+import reservationHandler.*;
+import dateHandlers.*;
 
 public class CmdSuggestTable implements Command
 {

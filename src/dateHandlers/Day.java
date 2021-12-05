@@ -1,3 +1,5 @@
+package dateHandlers;
+
 import java.security.PublicKey;
 import java.util.ArrayList;
 
@@ -108,18 +110,5 @@ public class Day implements Cloneable, Comparable<Day>{
 		else
 			return -1;
 	}
-
-//	public ArrayList<Table> ReserveTablesByNames(String[] cmdParts)
-//	{
-//		return this.assignmentController.requestTablesByNames(cmdParts);
-//	}
-//	public ArrayList<Table> ReserveTables(ArrayList<Table> tables)
-//	{
-//		return this.assignmentController.requestTables(tables);
-//	}
-//	public void undoReserveTables(ArrayList<Table> tables)
-//	{
-//		this.assignmentController.undoRequestTables(tables);
-//	}
 
 }

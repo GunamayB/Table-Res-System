@@ -1,4 +1,8 @@
+package reservationHandler;
+
 import java.util.ArrayList;
+import dateHandlers.*;
+import bookings.*;
 
 public class Reservation implements Comparable<Reservation> {
 	private String guestName;

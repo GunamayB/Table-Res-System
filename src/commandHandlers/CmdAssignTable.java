@@ -1,6 +1,14 @@
+package commandHandlers;
+
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import bookings.*;
+import tableHandler.*;
+import exceptionHandling.*;
+import dateHandlers.*;
+import bookings.*;
+import reservationHandler.*;
 
 public class CmdAssignTable extends RecordedCommand
 {

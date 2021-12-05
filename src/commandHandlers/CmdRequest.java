@@ -1,3 +1,10 @@
+package commandHandlers;
+
+import bookings.*;
+import dateHandlers.*;
+import exceptionHandling.*;
+import reservationHandler.*;
+
 public class CmdRequest extends RecordedCommand {
 
     private Reservation r;

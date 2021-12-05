@@ -1,3 +1,5 @@
+package reservationHandler;
+
 public class RStatePending implements RState
 {
     //no need for constructor

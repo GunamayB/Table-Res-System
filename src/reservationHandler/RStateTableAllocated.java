@@ -1,4 +1,7 @@
+package reservationHandler;
+
 import java.util.ArrayList;
+import tableHandler.*;
 
 public class RStateTableAllocated implements RState
 {

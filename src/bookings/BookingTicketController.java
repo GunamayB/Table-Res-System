@@ -1,4 +1,8 @@
+package bookings;
+
 import java.util.HashMap;
+import dateHandlers.*;
+
 public class BookingTicketController {
     private static HashMap<Day, Integer> tControllers = new HashMap<>();
     public static int takeTicket(Day d)

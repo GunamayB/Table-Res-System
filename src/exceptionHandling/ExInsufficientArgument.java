@@ -1,3 +1,5 @@
+package exceptionHandling;
+
 public class ExInsufficientArgument extends Exception
 {
     private static final long serialVersionUID = 1L;

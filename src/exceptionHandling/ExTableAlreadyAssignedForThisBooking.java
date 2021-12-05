@@ -1,3 +1,5 @@
+package exceptionHandling;
+
 public class ExTableAlreadyAssignedForThisBooking extends Exception
 {
     private static final long serialVersionUID = 1L;

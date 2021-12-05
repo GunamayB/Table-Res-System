@@ -1,3 +1,5 @@
+package tableHandler;
+
 import java.util.ArrayList;
 
 public class Table implements Comparable<Table>

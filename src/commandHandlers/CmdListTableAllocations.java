@@ -1,4 +1,9 @@
+package commandHandlers;
+
 import java.awt.print.Book;
+import bookings.*;
+import tableHandler.*;
+import dateHandlers.*;
 
 public class CmdListTableAllocations implements Command
 {

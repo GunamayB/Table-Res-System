@@ -1,3 +1,4 @@
+package exceptionHandling;
 
 public class ExTableAlreadyReserved extends Exception
 {
