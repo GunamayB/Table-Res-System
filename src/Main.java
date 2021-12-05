@@ -10,6 +10,7 @@ public class Main {
 
 	public static void main(String [] args) throws FileNotFoundException
 	{
+		System.out.println("Hello");
 
 		Scanner in = new Scanner(System.in);
 
