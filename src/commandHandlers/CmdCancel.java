@@ -7,8 +7,7 @@ import dateHandlers.*;
 import reservationHandler.*;
 import tableHandler.*;
 
-public class CmdCancel extends RecordedCommand
-{
+public class CmdCancel extends RecordedCommand {
     private Reservation r;
     private int ticket;
     private BookingOffice bo;
@@ -16,31 +15,25 @@ public class CmdCancel extends RecordedCommand
     private ArrayList<Table> allRequestedTables;
 
     @Override
-    public void execute(String[] cmdParts)
-    {
-        try
-        {
-            if (cmdParts.length < 3)
-            {
+    public void execute(String[] cmdParts) {
+        try {
+            if (cmdParts.length < 3) {
                 throw new ExInsufficientArgument();
             }
             bo = BookingOffice.getInstance();
             r = bo.findReservationByDateAndTicket(new Day(cmdParts[1]), Integer.parseInt(cmdParts[2]));
-            if (r == null)
-            {
+            if (r == null) {
                 throw new ExBookingNotFound();
             }
-            if (1 == SystemDate.getInstance().compareTo( new Day(cmdParts[1]))) //will be executed when new date is smaller than system date (already passed)
-            {
+            if (1 == SystemDate.getInstance().compareTo( new Day(cmdParts[1]))) {								//will be executed when new date is smaller than system date (already passed)
                 throw new ExDateHasAlreadyPassed();
             }
-            if (r.getStatus() instanceof RStateTableAllocated){
+            if (r.getStatus() instanceof RStateTableAllocated) {
                 dTACont = TableAssignContAccessor.getDailyTableAssignmentController(r.getDateDine());
-                allRequestedTables = ((RStateTableAllocated) r.getStatus()).getAllAssignedTables(); //down-casting because status is definitely "allocated"
+                allRequestedTables = ((RStateTableAllocated) r.getStatus()).getAllAssignedTables(); 			//down-casting because status is definitely "allocated"
                 dTACont.undoRequestTables(allRequestedTables);
                 bo.removeReservation(r);
-            }
-            else { //pending
+            } else { //pending
                 bo.removeReservation(r);
             }
             ticket = r.getTicketCode();
@@ -60,32 +53,28 @@ public class CmdCancel extends RecordedCommand
     }
 
     @Override
-    public void undoMe()
-    {
+    public void undoMe() {
         try{
-            if (r.getStatus() instanceof RStateTableAllocated){
-                for (Table t:       //check if all Tables are still available
-                        allRequestedTables) {
+            if (r.getStatus() instanceof RStateTableAllocated) {
+                for (Table t: allRequestedTables) {
                     if (dTACont.findAvailableTable(t) == null)
                         throw new ExTableAlreadyReserved(t.getTableName());
                 }
-                dTACont.requestTables(allRequestedTables, ticket); //request if tables are still available
+                dTACont.requestTables(allRequestedTables, ticket); 							//request if tables are still available
             }
             bo.addReservation(r);
             addRedoCommand(this);
-        } catch (ExTableAlreadyReserved e){
+        } catch (ExTableAlreadyReserved e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public void redoMe()
-    {
-        if (r.getStatus() instanceof RStateTableAllocated){
+    public void redoMe() {
+        if (r.getStatus() instanceof RStateTableAllocated) {
             dTACont.undoRequestTables(allRequestedTables);
             bo.removeReservation(r);
-        }
-        else { //pending
+        } else { //pending
             bo.removeReservation(r);
         }
         addUndoCommand(this);

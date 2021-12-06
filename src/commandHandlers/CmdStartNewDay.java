@@ -3,7 +3,7 @@ package commandHandlers;
 import dateHandlers.*;
 import exceptionHandling.*;
 
-public class CmdStartNewDay extends RecordedCommand{
+public class CmdStartNewDay extends RecordedCommand {
     private Day  old_Day;
     private Day new_Day;
 
@@ -21,10 +21,8 @@ public class CmdStartNewDay extends RecordedCommand{
 
     @Override
     public void execute(String[] cmdParts) {
-        try
-        {
-            if (cmdParts.length < 2)
-            {
+        try {
+            if (cmdParts.length < 2) {
                 throw new ExInsufficientArgument();
             }
             new_Day = new Day(cmdParts[1]);
@@ -33,10 +31,8 @@ public class CmdStartNewDay extends RecordedCommand{
             System.out.println("Done.");
             addUndoCommand(this);
             clearRedoList();
-        }catch (ExInsufficientArgument e)
-        {
+        } catch(ExInsufficientArgument e) {
             System.out.println(e.getMessage());
         }
-
     }
 }

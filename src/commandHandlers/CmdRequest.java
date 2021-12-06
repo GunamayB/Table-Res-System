@@ -11,19 +11,15 @@ public class CmdRequest extends RecordedCommand {
     private BookingOffice bo;
 
     @Override
-    public void execute(String[] cmdParts)
-    {
+    public void execute(String[] cmdParts) {
         try {
-            if (cmdParts.length < 5)
-            {
+            if (cmdParts.length < 5) {
                 throw new ExInsufficientArgument();
             }
-            if (1 == SystemDate.getInstance().compareTo( new Day(cmdParts[4]))) //will be executed when new date is smaller than system date (already passed)
-            {
+            if (1 == SystemDate.getInstance().compareTo( new Day(cmdParts[4]))) {									//will be executed when new date is smaller than system date (already passed)
                 throw new ExDateHasAlreadyPassed();
             }
-            if (BookingOffice.getInstance().findReservation(cmdParts) != null)
-            {
+            if (BookingOffice.getInstance().findReservation(cmdParts) != null) {
                 throw new ExReservationAlreadyExists();
             }
             bo = BookingOffice.getInstance();

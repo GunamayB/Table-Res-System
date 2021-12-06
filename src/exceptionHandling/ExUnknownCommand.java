@@ -1,14 +1,11 @@
 package exceptionHandling;
 
-public class ExUnknownCommand extends Exception
-{
+public class ExUnknownCommand extends Exception {
     private static final long serialVersionUID = 1L;
-    public ExUnknownCommand()
-    {
+    public ExUnknownCommand() {
         super("Unknown command");
     }
-    public ExUnknownCommand(String message)
-    {
+    public ExUnknownCommand(String message) {
         super(message);
     }
 }

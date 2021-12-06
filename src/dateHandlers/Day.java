@@ -2,7 +2,7 @@ package dateHandlers;
 
 import java.util.ArrayList;
 
-public class Day implements Cloneable, Comparable<Day>{
+public class Day implements Cloneable, Comparable<Day> {
 	
 	private int year;
 	private int month;
@@ -18,8 +18,7 @@ public class Day implements Cloneable, Comparable<Day>{
 	}
 	
 	// check if a given year is a leap year
-	static public boolean isLeapYear(int y)
-	{
+	static public boolean isLeapYear(int y) {
 		if (y%400==0)
 			return true;
 		else if (y%100==0)
@@ -31,10 +30,9 @@ public class Day implements Cloneable, Comparable<Day>{
 	}
 	
 	// check if y,m,d valid
-	static public boolean valid(int y, int m, int d)
-	{
+	static public boolean valid(int y, int m, int d) {
 		if (m<1 || m>12 || d<1) return false;
-		switch(m){
+		switch(m) {
 			case 1: case 3: case 5: case 7:
 			case 8: case 10: case 12:
 					 return d<=31; 
@@ -49,10 +47,9 @@ public class Day implements Cloneable, Comparable<Day>{
 		return false;
 	}
 
-	public void set(String sDay) //Set year,month,day based on a string like 01-Mar-2019
-	{		
+	public void set(String sDay) {								//Set year,month,day based on a string like 01-Mar-2019		
 		String[] sDayParts = sDay.split("-");
-		this.day = Integer.parseInt(sDayParts[0]); //Apply Integer.parseInt for sDayParts[0];
+		this.day = Integer.parseInt(sDayParts[0]); 				//Apply Integer.parseInt for sDayParts[0];
 		this.year = Integer.parseInt(sDayParts[2]); 
 		this.month = MonthNames.indexOf(sDayParts[1])/3 + 1;
 //		this.assignmentController = new DailyTableAssignmentController();
@@ -61,14 +58,12 @@ public class Day implements Cloneable, Comparable<Day>{
 	public Day(String sDay) { set(sDay); } //Constructor, simply call set(sDay)
 
 	@Override
-	public String toString() 
-	{		
+	public String toString() {		
 		return day+"-"+ MonthNames.substring((month-1)*3,(month)*3) + "-"+ year; // (month-1)*3,(month)*3
 	}
 
 	@Override
-	public Day clone() 
-	{
+	public Day clone() {
 		Day copy= null;
 		try {
 			copy = (Day) super.clone();
@@ -79,8 +74,7 @@ public class Day implements Cloneable, Comparable<Day>{
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return year*10000 + month*100 + day;
 	}
 
@@ -97,8 +91,7 @@ public class Day implements Cloneable, Comparable<Day>{
 	}
 
 	@Override
-	public int compareTo(Day anotherDay)
-	{
+	public int compareTo(Day anotherDay) {
 		//in comparison year is most important, month is less important, day is least important
 		int comparableIntForThisDay = this.year*10000 + this.month*100 + this.day;
 		int comparableIntForAnotherDay = anotherDay.year*10000 + anotherDay.month*100 + anotherDay.day;

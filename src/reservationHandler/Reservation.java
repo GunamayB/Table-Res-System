@@ -13,8 +13,7 @@ public class Reservation implements Comparable<Reservation> {
 	private int ticketCode;
 	private RState status;
 
-	public Reservation(String guestName, String phoneNumber, int totPersons, String sDateDine)
-	{	
+	public Reservation(String guestName, String phoneNumber, int totPersons, String sDateDine) {	
 		this.guestName = guestName;
 		this.phoneNumber = phoneNumber;
 		this.totPersons = totPersons;
@@ -24,12 +23,10 @@ public class Reservation implements Comparable<Reservation> {
 		this.status = new RStatePending();
 	}
 
-	public static String genPendingRequestsMsgFromListAndDay(ArrayList<Reservation> allReservations, Day d)
-	{
+	public static String genPendingRequestsMsgFromListAndDay(ArrayList<Reservation> allReservations, Day d) {
 		int numPendingRequests = 0;
 		int totNumPersons = 0;
-		for (Reservation r:
-			 allReservations) {
+		for (Reservation r: allReservations) {
 			if (r.dateDine.equals(d) && r.getStatus() instanceof RStatePending){
 				numPendingRequests++;
 				totNumPersons += r.totPersons;
@@ -39,53 +36,37 @@ public class Reservation implements Comparable<Reservation> {
 	}
 
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		//Learn: "-" means left-aligned
 		return String.format("%-13s%-11s%-14s%-25s%4d       %s", guestName, phoneNumber, dateRequest, dateDine+String.format(" (Ticket %d)", ticketCode), totPersons, status.genStatusMessage());
 
 	}
-	public static String getListingHeader() 
-	{
+	public static String getListingHeader() {
 		return String.format("%-13s%-11s%-14s%-25s%-11s%s", "Guest Name", "Phone", "Request Date", "Dining Date and Ticket", "#Persons", "Status");
 	}
 	@Override
 	public int compareTo(Reservation another) {
-		if(this.guestName.equals(another.guestName))//name is same
-		{
-			if (this.phoneNumber.equals(another.phoneNumber))//name and phone are same
-			{
-				if (0 == this.dateDine.compareTo(another.dateDine)) //dine date, name, and phone are same
-				{
+		if(this.guestName.equals(another.guestName)) {											//name is same
+			if (this.phoneNumber.equals(another.phoneNumber)) {									//name and phone are same
+				if (0 == this.dateDine.compareTo(another.dateDine)) {							//dine date, name, and phone are same
 					return 0;
-				}
-				else if (this.dateDine.compareTo(another.dateDine) > 0)
-				{
+				} else if (this.dateDine.compareTo(another.dateDine) > 0) {
 					return 1;
 				}
-			}
-			else if (this.phoneNumber.compareTo(another.phoneNumber)>0)
-			{
+			} else if (this.phoneNumber.compareTo(another.phoneNumber)>0) {
 				return 1;
 			}
-		}
-		else if (this.guestName.compareTo(another.guestName)>0)
-		{
+		} else if (this.guestName.compareTo(another.guestName)>0) {
 			return 1;
 		}
 		return -1; //when this reservation is neither equal nor bigger
 	}
 
-	public static Reservation searchReservation(ArrayList<Reservation> list, String[] cmdParts)
-	{
-		for (Reservation r:
-			 list) {
-			if (r.guestName.equals(cmdParts[1]))
-			{
-				if (r.phoneNumber.equals(cmdParts[2]))
-				{
-					if (r.dateDine.equals(new Day(cmdParts[4])))
-					{
+	public static Reservation searchReservation(ArrayList<Reservation> list, String[] cmdParts) {
+		for (Reservation r: list) {
+			if (r.guestName.equals(cmdParts[1])) {
+				if (r.phoneNumber.equals(cmdParts[2])) {
+					if (r.dateDine.equals(new Day(cmdParts[4]))) {
 						return r;
 					}
 				}
@@ -94,52 +75,37 @@ public class Reservation implements Comparable<Reservation> {
 		return null;
 	}
 
-	public static Reservation searchByDateAndTicket(ArrayList<Reservation> list, Day targetDay, int targetTicket)
-	{
-		for (Reservation r:
-			 list) {
+	public static Reservation searchByDateAndTicket(ArrayList<Reservation> list, Day targetDay, int targetTicket) {
+		for (Reservation r: list) {
 			if (r.dateDine.equals(targetDay) && r.ticketCode == targetTicket)
 				return r;
 		}
 		return null;
 	}
 
-    public int getTicketCode()
-    {
+    public int getTicketCode() {
         return ticketCode;
     }
-
-	public void takeTicketBack()
-	{
+	public void takeTicketBack() {
 		this.ticketCode = BookingTicketController.takeTicket(dateDine);
 	}
-	public void giveTicketBack()
-    {
+	public void giveTicketBack() {
         BookingTicketController.undoTakeTicket(dateDine);
     }
-
-    public void setStatus(RState newStatus)
-	{
+    public void setStatus(RState newStatus) {
 		this.status = newStatus;
 	}
-
-	public RState getStatus()
-	{
+	public RState getStatus() {
 		return status;
 	}
-
-	public Day getDateDine()
-	{
+	public Day getDateDine() {
 		return dateDine;
 	}
-
-	public int getTotPersons()
-	{
+	public int getTotPersons() {
 		return totPersons;
 	}
 
-	public boolean isNumOfSeatsEnough(int numOfSeats)
-	{
+	public boolean isNumOfSeatsEnough(int numOfSeats) {
 		if (this.totPersons <= numOfSeats)
 			return true;
 		else

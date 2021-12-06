@@ -10,8 +10,7 @@ import dateHandlers.*;
 import bookings.*;
 import reservationHandler.*;
 
-public class CmdAssignTable extends RecordedCommand
-{
+public class CmdAssignTable extends RecordedCommand {
     private BookingOffice bo;
     private Day targetDate;
     private int targetTicketCode;
@@ -20,30 +19,25 @@ public class CmdAssignTable extends RecordedCommand
     private DailyTableAssignmentController dTACont;
 
     @Override
-    public void execute(String[] cmdParts)
-    {
+    public void execute(String[] cmdParts) {
         try {
             if (cmdParts.length < 4){
                 throw new ExInsufficientArgument();
             }
-            if (1 == SystemDate.getInstance().compareTo( new Day(cmdParts[1]))) //will be executed when new date is smaller than system date (already passed)
-            {
+            if (1 == SystemDate.getInstance().compareTo( new Day(cmdParts[1]))) {											 //will be executed when new date is smaller than system date (already passed)
                 throw new ExDateHasAlreadyPassed();
             }
             targetDate = new Day(cmdParts[1]);
             targetTicketCode = Integer.parseInt(cmdParts[2]);
             bo = BookingOffice.getInstance();
             this.r = bo.findReservationByDateAndTicket(targetDate, targetTicketCode);
-            if (r == null)
-            {
+            if (r == null) {
                 throw new ExBookingNotFound();
             }
-            if (r.getStatus() instanceof RStateTableAllocated)
-            {
+            if (r.getStatus() instanceof RStateTableAllocated) {
                 throw new ExTableAlreadyAssignedForThisBooking();
             }
-            if (!r.isNumOfSeatsEnough(Table.maxCapacityOfTables(Arrays.copyOfRange(cmdParts,3, cmdParts.length)) ))
-            {
+            if (!r.isNumOfSeatsEnough(Table.maxCapacityOfTables(Arrays.copyOfRange(cmdParts,3, cmdParts.length)) )) {
                 throw new ExNotEnoughSeatsForBooking();
             }
             /*
@@ -77,16 +71,14 @@ public class CmdAssignTable extends RecordedCommand
     }
 
     @Override
-    public void undoMe()
-    {
+    public void undoMe() {
         dTACont.undoRequestTables(allRequestedTables);
         r.setStatus( new RStatePending());
         addRedoCommand(this);
     }
 
     @Override
-    public void redoMe()
-    {
+    public void redoMe() {
         dTACont.requestTables(allRequestedTables, targetTicketCode);
         r.setStatus(new RStateTableAllocated(allRequestedTables));
         addUndoCommand(this);

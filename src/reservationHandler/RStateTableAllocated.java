@@ -3,28 +3,23 @@ package reservationHandler;
 import java.util.ArrayList;
 import tableHandler.*;
 
-public class RStateTableAllocated implements RState
-{
+public class RStateTableAllocated implements RState {
     private ArrayList<Table> allAssignedTables;
 
-    public RStateTableAllocated(ArrayList<Table> anAllAssignedTables)
-    {
+    public RStateTableAllocated(ArrayList<Table> anAllAssignedTables) {
         this.allAssignedTables = anAllAssignedTables;
     }
     //check for error
     @Override
-    public String genStatusMessage()
-    {
+    public String genStatusMessage() {
         String msg = "Table assigned:";
-        for (Table t:
-             allAssignedTables) {
+        for (Table t: allAssignedTables) {
             msg += " " + t.getTableName();
         }
         return msg;
     }
 
-    public ArrayList<Table> getAllAssignedTables()
-    {
+    public ArrayList<Table> getAllAssignedTables() {
         return allAssignedTables;
     }
 }

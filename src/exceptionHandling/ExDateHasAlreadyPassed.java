@@ -1,14 +1,11 @@
 package exceptionHandling;
 
-public class ExDateHasAlreadyPassed extends Exception
-{
+public class ExDateHasAlreadyPassed extends Exception {
     private static final long serialVersionUID = 1L;
-    public ExDateHasAlreadyPassed()
-    {
+    public ExDateHasAlreadyPassed() {
         super("Date has already passed!");
     }
-    public ExDateHasAlreadyPassed(String message)
-    {
+    public ExDateHasAlreadyPassed(String message) {
         super(message);
     }
 }

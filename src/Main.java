@@ -8,8 +8,7 @@ import dateHandlers.*;
 
 public class Main {
 
-	public static void main(String [] args) throws FileNotFoundException
-	{
+	public static void main(String [] args) throws FileNotFoundException {
 		System.out.println("Hello");
 
 		Scanner in = new Scanner(System.in);
@@ -26,8 +25,7 @@ public class Main {
 		System.out.println("\n> "+cmdLine1);
 		SystemDate.createTheInstance(cmdLine1Parts[1]);
 
-		while (inFile.hasNext())
-		{
+		while (inFile.hasNext()) {
 			String cmdLine = inFile.nextLine().trim();
 
 			//Blank lines exist in data file as separators.  Skip them.

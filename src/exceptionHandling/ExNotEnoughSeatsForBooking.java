@@ -1,14 +1,11 @@
 package exceptionHandling;
 
-public class ExNotEnoughSeatsForBooking extends Exception
-{
+public class ExNotEnoughSeatsForBooking extends Exception {
     private static final long serialVersionUID = 1L;
-    public ExNotEnoughSeatsForBooking()
-    {
+    public ExNotEnoughSeatsForBooking() {
         super("Not enough seats for the booking!");
     }
-    public ExNotEnoughSeatsForBooking(String message)
-    {
+    public ExNotEnoughSeatsForBooking(String message) {
         super(message);
     }
 }

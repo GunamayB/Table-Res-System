@@ -1,11 +1,9 @@
 package reservationHandler;
 
-public class RStatePending implements RState
-{
+public class RStatePending implements RState {
     //no need for constructor
     @Override
-    public String genStatusMessage()
-    {
+    public String genStatusMessage() {
         return "Pending";
     }
 }
