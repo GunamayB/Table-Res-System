@@ -69,5 +69,4 @@ request|BLUE, Mr|90000003|22|22-Mar-2019
 suggestTable|22-Mar-2019|7
 
 listReservations
-suck
 listTableAllocations|22-Mar-2019
